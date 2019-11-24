@@ -1,0 +1,8 @@
+package VD2;
+import java.awt.Color;
+import java.awt.Graphics;
+//Flyweight Design Pattern Interface
+public interface Shape {
+    public void draw(Graphics g, int x, int y, int width, int height,
+            Color color);
+}
