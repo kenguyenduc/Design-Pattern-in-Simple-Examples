@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Mediator">
+  <ClassDiagramComponents>
+    <Class name="ChatClient" package="mediator" visibility="public" xPosition="802.0" yPosition="104.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ChatMediatorImpl" package="mediator" visibility="public" xPosition="88.0" yPosition="206.0">
+      <Fields>
+        <Field name="users" type="List&lt;User&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="addUser" returnType="void" visibility="public">
+          <Argument type="User" name="user"/>
+        </Method>
+        <Method name="sendMessage" returnType="void" visibility="public">
+          <Argument type="String" name="msg"/>
+          <Argument type="User" name="user"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="User" package="mediator" visibility="public" isAbstract="true" xPosition="528.0" yPosition="28.0">
+      <Fields>
+        <Field name="mediator" type="ChatMediator" visibility="protected"/>
+        <Field name="name" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="ChatMediator" name="med"/>
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="send" returnType="void" visibility="public" isAbstract="true">
+          <Argument type="String" name="msg"/>
+        </Method>
+        <Method name="receive" returnType="void" visibility="public" isAbstract="true">
+          <Argument type="String" name="msg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="UserImpl" package="mediator" visibility="public" xPosition="516.0" yPosition="266.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="ChatMediator" name="med"/>
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="send" returnType="void" visibility="public">
+          <Argument type="String" name="msg"/>
+        </Method>
+        <Method name="receive" returnType="void" visibility="public">
+          <Argument type="String" name="msg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="ChatMediator" package="mediator" visibility="public" xPosition="88.0" yPosition="28.0">
+      <Methods>
+        <Method name="sendMessage" returnType="void" visibility="public">
+          <Argument type="String" name="msg"/>
+          <Argument type="User" name="user"/>
+        </Method>
+        <Method name="addUser" returnType="void" visibility="public">
+          <Argument type="User" name="user"/>
+        </Method>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="mediator.ChatMediatorImpl" target="mediator.ChatMediator"/>
+    <UseRelation source="mediator.ChatMediatorImpl" target="mediator.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="mediator.UserImpl" target="mediator.User"/>
+    <HasRelation name="mediator" source="mediator.User" target="mediator.ChatMediator" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="users" source="mediator.ChatMediatorImpl" target="mediator.User" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;User&gt;"/>
+    <UseRelation source="mediator.ChatMediator" target="mediator.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
